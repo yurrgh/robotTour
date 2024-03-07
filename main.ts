@@ -44,11 +44,11 @@ function navigatePath(path: GridPosition[], fullSquareTime: number, halfSquareTi
             if(currentPos[1] > nextPos[1]){
                 turnLeft();
                 driveForward(halfSquareTime+fullSquareTime);
-                turnRight;
+                turnRight();
             }else{
-                turnRight;
+                turnRight();
                 driveForward(halfSquareTime + fullSquareTime);
-                turnLeft;
+                turnLeft();
             }
         }
         else{
