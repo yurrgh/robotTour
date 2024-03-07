@@ -19,12 +19,14 @@ function driveForward(duration: number): void {
 
 // Function to turn the robot left
 function turnLeft(): void {
+    let turnLeftTime = 1000;
     motion.turnLeft(15);
     pause(turnLeftTime); // Assuming a 90-degree turn takes 1 second
     motion.stop(); // Stop the robot after turning left
 }
 
 function turnRight() : void {
+    let turnLeftTime = 1000;
     motion.turnRight(15);
     pause(turnLeftTime);
     motion.stop();
@@ -70,6 +72,6 @@ let path: GridPosition[] = [
 //Starting grid will always be 
 let fullSquareTime = 1000; // Time in milliseconds for a full square
 let halfSquareTime = 500; // Time in milliseconds for a half square
-let turnLeftTime = 1000;
+
 
 navigatePath(path, fullSquareTime, halfSquareTime);
