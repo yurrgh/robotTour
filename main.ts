@@ -19,14 +19,12 @@ function driveForward(duration: number): void {
 
 // Function to turn the robot left
 function turnLeft(): void {
-    let turnLeftTime = 1000;
     motion.turnLeft(15);
     pause(turnLeftTime); // Assuming a 90-degree turn takes 1 second
     motion.stop(); // Stop the robot after turning left
 }
 
-function turnRight() : void {
-    let turnLeftTime = 1000;
+function turnRight(): void {
     motion.turnRight(15);
     pause(turnLeftTime);
     motion.stop();
@@ -36,33 +34,34 @@ function turnRight() : void {
 type GridPosition = [number, number];
 
 // Function to navigate the robot through a series of grid positions
-function navigatePath(path: GridPosition[], fullSquareTime: number, halfSquareTime: number): void {
+function navigatePath(path: GridPosition[], fullSquareTime: number, halfSquareTime: number, turnLeftTime: number): void {
     for (let i = 0; i < path.length; i++) {
         let currentPos: GridPosition = path[i];
         let nextPos: GridPosition | undefined = path[i + 1];
 
         // Drive forward to the next position
-        if (nextPos[0] == currentPos[0]) {
-            if(currentPos[1] > nextPos[1]){
+        if (nextPos && nextPos[0] == currentPos[0]) {
+            if (currentPos[1] > nextPos[1]) {
                 turnLeft();
-                driveForward(halfSquareTime+fullSquareTime);
+                driveForward(halfSquareTime + fullSquareTime);
                 turnRight();
-            }else{
+            } else {
                 turnRight();
                 driveForward(halfSquareTime + fullSquareTime);
                 turnLeft();
             }
         }
-        else{
+        else {
             driveForward(fullSquareTime);
-        }   
+        }
     }
 }
 
-
+// Define the path
 let path: GridPosition[] = [
-    [3,0],[3,1]
-];//Tell it which grid positions to go through
+    [3, 0], [3, 1]
+];
+//Tell it which grid positions to go through
 // [0,0] [0,1] [0,2] [0,3]
 // [1,0] [1,1] [1,2] [1,3]
 // [2,0] [2,1] [2,2] [2,3]
@@ -70,8 +69,12 @@ let path: GridPosition[] = [
 //start pose will always be a bottom one
 //depending on which way you face your robot
 //Starting grid will always be 
-let fullSquareTime = 1000; // Time in milliseconds for a full square
-let halfSquareTime = 500; // Time in milliseconds for a half square
+// Time in milliseconds for a full square
+let fullSquareTime = 1000;
+// Time in milliseconds for a half square
+let halfSquareTime = 500;
+// Assuming a 90-degree turn takes 1 second
+let turnLeftTime = 1000;
 
+navigatePath(path, fullSquareTime, halfSquareTime, turnLeftTime); // Call the function
 
-navigatePath(path, fullSquareTime, halfSquareTime);
