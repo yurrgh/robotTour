@@ -37,8 +37,7 @@ type GridPosition = [number, number];
 function navigatePath(path: GridPosition[], fullSquareTime: number, halfSquareTime: number, turnLeftTime: number): void {
     for (let i = 0; i < path.length; i++) {
         let currentPos: GridPosition = path[i];
-        let nextPos: GridPosition | undefined = path[i + 1];
-
+        let nextPos: GridPosition = path[i+1];
         // Drive forward to the next position
         if (nextPos && nextPos[0] == currentPos[0]) {
             if (currentPos[1] > nextPos[1]) {
